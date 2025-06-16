@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Portfolio</title>
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto Slab', serif;
+            color: #fff;
+        }
+
+        /* Background Styles */
+        body {
+            width: 100vw;
+            height: 100%;
+            min-height: 100vh;
+            padding-bottom: 50px;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+        }
+
+        /* Selection Styles */
+        ::-moz-selection {
+            color: #fff;
+            background: #9FBE5A;
+        }
+        ::selection {
+            color: #fff;
+            background: #9FBE5A;
+        }
+
+        /* Typography */
+        h1 {
+            margin-bottom: 75px;
+            padding: 0 20vw;
+            font: 400 56px "Inter", serif;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Form Container */
+        .wrapper {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        /* Form Styles */
+        .form__contact {
+            max-width: 600px;
+            margin: 0 auto;
+            border-left: 30px solid #2a2a72;
+            border-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI0MS44NnB4IiBoZWlnaHQ9IjUyLjMyNnB4IiB2aWV3Qm94PSIwIDAgNDEuODYgNTIuMzI2IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA0MS44NiA1Mi4zMjYiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiMyYTJhNzIiIGQ9Ik0wLDB2MjUuMTYzaDcuMDk3YzAuNTAxLTQuOTg5LDQuNzEyLTguODg0LDkuODMzLTguODg0YzUuNDU4LDAsOS44ODQsNC40MjUsOS44ODQsOS44ODRzLTQuNDI1LDkuODg0LTkuODg0LDkuODg0Yy01LjEyMSwwLTkuMzMyLTMuODk1LTkuODMzLTguODg0SDB2MjUuMTYzaDQxLjg2VjBIMHoiLz48L3N2Zz4=) 5% 100% repeat;
+            border-image-width: 0px 0px 0px 30px;
+            transform: translateY(100%);
+            animation: init 1s ease-in-out forwards;
+        }
+
+        .form__contact fieldset {
+            position: relative;
+            margin: 0;
+            padding: 30px 30px 40px 80px;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            font: 24px "Shadows Into Light", cursive;
+            background: rgba(42, 42, 114, 0.8);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .form__contact fieldset:after {
+            position: absolute;
+            top: 0;
+            left: 50px;
+            content: "";
+            height: 100%;
+            width: 1px;
+            border-left: double #9FBE5A;
+        }
+
+        .form__contact p {
+            margin: 0 0 40px 0;
+            line-height: 40px;
+            color: #fff;
+        }
+
+        /* Input Styles */
+        .form__contact input,
+        .form__contact textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #9FBE5A;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: "Shadows Into Light";
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form__contact input:focus,
+        .form__contact textarea:focus {
+            outline: none;
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(159, 190, 90, 0.5);
+        }
+
+        .form__contact input::placeholder,
+        .form__contact textarea::placeholder {
+            color: #ccc;
+            opacity: 0.7;
+        }
+
+        /* Textarea Specific */
+        .form__contact textarea {
+            width: 100%;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Button Styles */
+        .form__contact button {
+            margin-top: 40px;
+            float: right;
+            border: none;
+            font-family: "Shadows Into Light", cursive;
+            color: #9FBE5A;
+            background: transparent;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+            font-size: 22px;
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+
+        .form__contact button:hover {
+            transform: translateX(10px);
+            color: #fff;
+            background: rgba(159, 190, 90, 0.3);
+        }
+
+        /* Animations */
+        @keyframes init {
+            75% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes do-blur {
+            0% {
+                filter: url(#blur4);
+            }
+            25% {
+                filter: url(#blur3);
+            }
+            50% {
+                filter: url(#blur2);
+            }
+            75% {
+                filter: url(#blur1);
+            }
+            100% {
+                filter: url(#blur0);
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+                padding: 0 10vw;
+            }
+            
+            .form__contact fieldset {
+                padding: 20px 20px 30px 60px;
+                font-size: 18px;
+            }
+            
+            .form__contact input,
+            .form__contact textarea {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+            
+            .form__contact {
+                border-left-width: 15px;
+                border-image-width: 0px 0px 0px 15px;
+            }
+            
+            .form__contact fieldset {
+                padding: 15px 15px 20px 40px;
+                font-size: 16px;
+            }
+            
+            .form__contact fieldset:after {
+                left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Create your portfolio</h1>
+        
+      <form class="form__contact" action="{{ url_for('create_portfolio') }}" method="POST">
+            <fieldset>
+                <p>
+                    My name is 
+                    <input type="text" name="name" placeholder="your name" tabindex="1" value="{{data.name}}" required /> and my 
+                    tag line is   
+                    <input type="text" name="title" placeholder="your Tag line" tabindex="2" value="{{data.title}}" required />
+                </p>
+        
+                <p>
+                    My profile picture URL is 
+                    <input type="text" name="profile_picture" placeholder="Profile picture URL" tabindex="3" value="{{data.profile_picture}}" required />
+                </p>
+        
+                <p>
+                    I studied my 
+                    <input type="text" name="program_name_1" placeholder="Program name" tabindex="4" value="{{data.program_name_1}}" required />
+                    from 
+                    <input type="text" name="program_1_university" placeholder="School name" tabindex="5" value="{{data.program_1_university}}" required />. 
+                    Year: 
+                    <input type="text" name="program1_year" placeholder="Year" tabindex="6" value="{{data.program1_year}}" required />. 
+                    Skills learned: 
+                    <input type="text" name="program1_skills" placeholder="Skills" tabindex="7" value="{{data.program1_skills}}" required />
+                </p>
+        
+                <p>
+                    I studied my 
+                    <input type="text" name="program_name_2" placeholder="College Program Name" tabindex="8" value="{{data.program_name_2}}" required />
+                    from 
+                    <input type="text" name="program_2_university" placeholder="College Name" tabindex="9" value="{{data.program_2_university}}" required />. 
+                    Year: 
+                    <input type="text" name="program2_year" placeholder="Year" tabindex="10" value="{{data.program2_year}}" required />. 
+                    Skills learned: 
+                    <input type="text" name="program2_skills" placeholder="Skills" tabindex="11" value="{{data.program2_skills}}" required />
+                </p>
+        
+                <p>My project details</p>
+        
+                <p>
+                    My first project is  
+                    <input type="text" name="project1_name" placeholder="Project Name" tabindex="12" value="{{data.project1_name}}" required />
+                    about 
+                    <input type="text" name="project1_description" placeholder="About the project" tabindex="13" value="{{data.project1_description}}" required />. 
+                    Technologies used:  
+                    <input type="text" name="project1_skills" placeholder="Technologies" tabindex="14" value="{{data.project1_skills}}" required />
+                </p>
+        
+                <p>
+                    My second project is  
+                    <input type="text" name="project2_name" placeholder="Project Name" tabindex="15" value="{{data.project2_name}}" required />
+                    about 
+                    <input type="text" name="project2_description" placeholder="About the project" tabindex="16" value="{{data.project2_description}}" required />. 
+                    Technologies used:  
+                    <input type="text" name="project2_skills" placeholder="Technologies" tabindex="17" value="{{data.project2_skills}}" required />
+                </p>
+        
+                <p>
+                    My third project is  
+                    <input type="text" name="project3_name" placeholder="Project Name" tabindex="18" value="{{data.project3_name}}" required />
+                    about 
+                    <input type="text" name="project3_description" placeholder="About the project" tabindex="19" value="{{data.project3_description}}" required />. 
+                    Technologies used:  
+                    <input type="text" name="project3_skills" placeholder="Technologies" tabindex="20" value="{{data.project3_skills}}" required />
+                </p>
+        
+                <p>
+                    My email is 
+                    <input type="email" name="email" placeholder="Email" tabindex="21" value="{{data.email}}" required />
+                </p>
+        
+                <p>
+                    My location is 
+                    <input type="text" name="location" placeholder="Location" tabindex="22" value="{{data.location}}" required />
+                </p>
+        
+                <p>
+                    My phone number is 
+                    <input type="text" name="phone" placeholder="Phone" tabindex="23" value="{{data.phone}}" required />
+                </p>
+        
+                <p>
+                    About me: 
+                    <textarea name="about_me" id="about_me_id" placeholder="Tell us about yourself" tabindex="24" required>{{data.about_me}}</textarea>
+                    <button type="button" onclick="generateAboutMe()">Generate</button>
+                </p>
+                
+                <button type="submit" class="button button--xlarge" tabindex="25">Send message &#187;</button>
+            </fieldset>
+        </form>
+    </div>
+    
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+        <defs>
+            <filter id="blur0">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
+            </filter>
+            <filter id="blur1">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0 5" />
+            </filter>
+            <filter id="blur2">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0 10" />
+            </filter>
+            <filter id="blur3">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0 15" />
+            </filter>
+            <filter id="blur4">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0 20" />
+            </filter>
+        </defs>
+    </svg>
+
+    <script>
+        function generateAboutMe() {
+            var about_me_input = document.getElementById('about_me_id');
+            about_me_input.value = "generating...";
+            
+            // In a real application, you would likely make an AJAX call here to generate content
+            // For demo purposes, we'll just set some sample text after a delay
+            setTimeout(function() {
+                about_me_input.value = "I am a passionate developer with experience in various technologies. My journey in tech began when I discovered my love for problem-solving. I enjoy creating elegant solutions to complex problems and continuously learning new skills to stay at the forefront of technology trends.";
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

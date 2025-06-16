@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Dashboard</title>
+    <style>
+        /* Base Styles */
+        html, body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0a0a0a;
+            color: #f0f0f0;
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        /* Screens */
+        .screen {
+            position: relative;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #121212;
+        }
+
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(18,18,18,0.9) 0%, rgba(18,18,18,0.7) 100%);
+            z-index: 1;
+        }
+
+        .screen.left {
+            border-right: 1px solid #333;
+        }
+
+        /* Info Content */
+        .info {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 80%;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(5px);
+            color: #f0f0f0;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .button:active {
+            transform: translateY(-1px);
+        }
+
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .button:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Rocket Animation */
+        .rocket {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 2.5c0 0 4.5 2.04 4.5 10.5 0 2.49-1.04 5.57-1.6 7H9.1c-.56-1.43-1.6-4.51-1.6-7C7.5 4.54 12 2.5 12 2.5zm2 8.5c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2zm-6.31 9.52c-.48-1.23-1.52-4.17-1.67-6.87L4 15v7l3.69-1.48zM20 15v7l-3.69-1.48c-.15-2.69-1.2-5.64-1.67-6.87L20 15z"/></svg>') center/contain no-repeat;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .rocket.launch {
+            animation: rocketLaunch 2s ease-out forwards;
+        }
+
+        @keyframes rocketLaunch {
+            0% {
+                bottom: -50px;
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            20% {
+                transform: translateX(-50%) scale(1.2) rotate(5deg);
+            }
+            100% {
+                bottom: 120%;
+                opacity: 0;
+                transform: translateX(-50%) scale(0.5) rotate(0deg);
+            }
+        }
+
+        /* Hover Effects */
+        .hover-left .left {
+            width: 70%;
+        }
+
+        .hover-left .right {
+            width: 30%;
+            filter: brightness(0.7);
+        }
+
+        .hover-right .right {
+            width: 70%;
+        }
+
+        .hover-right .left {
+            width: 30%;
+            filter: brightness(0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                flex-direction: column;
+            }
+            
+            .screen {
+                width: 100%;
+                height: 50%;
+            }
+            
+            .screen.left {
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+            
+            .hover-left .left, 
+            .hover-left .right,
+            .hover-right .left,
+            .hover-right .right {
+                width: 100%;
+                height: 70%;
+                filter: none;
+            }
+            
+            .hover-left .right,
+            .hover-right .left {
+                height: 30%;
+                filter: brightness(0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+        <section class="screen left">
+           <div class="info">
+              <h1>View All Contacts</h1>
+              <a href="{{ url_for('list_contacts') }}" class="button" id="contacts-btn">View</a>
+              <div class="rocket" id="contacts-rocket"></div>
+           </div>
+        </section>
+        <section class="screen right">
+           <div class="info">
+              <h1>View All Portfolios</h1>
+              <a href="{{ url_for('view_all_portfolios') }}" class="button" id="portfolio-btn">View</a>
+              <div class="rocket" id="portfolio-rocket"></div>
+           </div>
+        </section>
+    </div>
+
+    <script>
+        // Screen hover effects
+        const container = document.querySelector('.container');
+        const leftScreen = document.querySelector('.left');
+        const rightScreen = document.querySelector('.right');
+        
+        leftScreen.addEventListener('mouseenter', () => {
+            container.classList.add('hover-left');
+            container.classList.remove('hover-right');
+        });
+        
+        rightScreen.addEventListener('mouseenter', () => {
+            container.classList.add('hover-right');
+            container.classList.remove('hover-left');
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            container.classList.remove('hover-left', 'hover-right');
+        });
+
+        // Rocket launch animation
+        function setupRocketLaunch(btnId, rocketId) {
+            const btn = document.getElementById(btnId);
+            const rocket = document.getElementById(rocketId);
+            
+            btn.addEventListener('click', (e) => {
+                // Prevent immediate navigation for demo
+                e.preventDefault();
+                
+                // Position rocket at button
+                const btnRect = btn.getBoundingClientRect();
+                rocket.style.left = `${btnRect.left + btnRect.width/2}px`;
+                rocket.style.bottom = `${window.innerHeight - btnRect.top - btnRect.height/2}px`;
+                
+                // Launch rocket
+                rocket.classList.add('launch');
+                
+                // Navigate after animation completes
+                setTimeout(() => {
+                    window.location.href = btn.href;
+                }, 1800);
+            });
+            
+            // Reset rocket after animation
+            rocket.addEventListener('animationend', () => {
+                rocket.classList.remove('launch');
+            });
+        }
+        
+        // Setup rockets for both buttons
+        setupRocketLaunch('contacts-btn', 'contacts-rocket');
+        setupRocketLaunch('portfolio-btn', 'portfolio-rocket');
+    </script>
+</body>
+</html>
